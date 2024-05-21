@@ -12,25 +12,28 @@ public class LessonApplication {
 		var userService = context.getBean(IProductService.class);
 
 		//findAll
-//		var list = userService.findAll();
-//		list.stream().forEach(System.out::println);
+		System.out.println("findAll");
+		var list = userService.findAll();
+		list.stream().forEach(System.out::println);
 
 		//findById
-//		System.out.println(userService.findById(2));
-//
+		System.out.println("findById");
+		System.out.println(userService.findById(2));
+
 
 		//insert
-//			System.out.println(userService.insert(new ProductRecord(1,"蛍光ペン(赤)",80)));
+		System.out.println("insert");
+		System.out.println("実行件数:"+userService.insert(new ProductRecord(1,"蛍光ペン(赤)",80)));
 
 		//update
-//		System.out.println(userService.update(new ProductRecord(2,"蛍光ペン(緑)",80)));
-//		System.out.println(userService.update(new ProductRecord(5555,"蛍光ペン(緑)",80)));
+		System.out.println("update");
+		System.out.println("ID有りの場合:"+userService.update(new ProductRecord(2,"蛍光ペン(緑)",80)));
+		System.out.println("ID無しの場合:"+userService.update(new ProductRecord(5555,"蛍光ペン(緑)",80)));
 
 		//delete
-//		System.out.println(userService.delete(4));
-//		System.out.println(userService.delete(5555));
-
-
+		System.out.println("delete");
+		System.out.println("ID有りの場合:"+userService.delete(4));
+		System.out.println("ID無しの場合:"+userService.delete(5555));
 	}
 
 }
