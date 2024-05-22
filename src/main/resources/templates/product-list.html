@@ -12,7 +12,8 @@
     </tr>
     <tr th:each="product : ${productList}">
         <td>
-            <a th:text="${product.id}" href="#" th:href="@{product/{productId}(productId=${product.id})}"></a>
+<!--            <a th:text="${product.id}" href="#" th:href="@{product/{productId}(productId=${product.id})}"></a>-->
+            <a th:text="${product.id}" href="#" th:href="@{product/__${product.id}__}"></a>
         </td>
         <td>
             <div th:text="${product.name}"></div>
