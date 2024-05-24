@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>製品一覧</title>
+    <style>
+        .button {
+          display       : inline-block;
+          font-size     : 12pt;        /* 文字サイズ */
+          text-align    : center;      /* 文字位置   */
+          cursor        : pointer;     /* カーソル   */
+          padding       : 12px 12px;   /* 余白       */
+          background    : #ffffff;     /* 背景色     */
+          color         : #000000;     /* 文字色     */
+          line-height   : 1em;         /* 1行の高さ  */
+          transition    : .3s;         /* なめらか変化 */
+          border        : 2px solid #000000;
+        }
+        .button:hover {
+        }
+    </style>
 </head>
 <body>
 <h1>商品一覧</h1>
@@ -23,5 +39,6 @@
         </td>
     </tr>
 </table>
+<a th:href="product-add" class="button">新規追加</a>
 </body>
 </html>

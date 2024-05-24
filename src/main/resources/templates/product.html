@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>製品詳細</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>製品詳細</title>
+        <style>
+            .button {
+              display       : inline-block;
+              font-size     : 12pt;        /* 文字サイズ */
+              text-align    : center;      /* 文字位置   */
+              cursor        : pointer;     /* カーソル   */
+              padding       : 12px 12px;   /* 余白       */
+              background    : #ffffff;     /* 背景色     */
+              color         : #000000;     /* 文字色     */
+              line-height   : 1em;         /* 1行の高さ  */
+              transition    : .3s;         /* なめらか変化 */
+              border        : 2px solid #000000;
+            }
+            .button:hover {
+            }
+        </style>
+    </head>
     <body>
         <h1>商品詳細</h1>
-        <p th:text="|id: ${product.id}|"></p>
-        <p th:text="|商品名: ${product.name}|"></p>
-        <p th:text="|値段: ${product.price}|"></p>
+        <form th:action="edit" method="post">
+            <p th:text="|id: ${product.id}|"></p>
+            <p th:text="|商品名: ${product.name}|"></p>
+            <p th:text="|値段: ${product.price}|"></p>
+            <button type="submit" class="button" th:name="|update${product.id}|">修正</button>
+            <button type="submit" class="button" th:name="|delete${product.id}|">削除</button>
+        </form>
     </body>
 </html>
