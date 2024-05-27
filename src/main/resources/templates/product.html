@@ -16,18 +16,26 @@
               transition    : .3s;         /* なめらか変化 */
               border        : 2px solid #000000;
             }
-            .button:hover {
+
+            .inputLabel{
+                display     :inline-block;
+                width       :100px;
             }
         </style>
     </head>
     <body>
         <h1>商品詳細</h1>
-        <form th:action="edit" method="post">
-            <p th:text="|id: ${product.id}|"></p>
-            <p th:text="|商品名: ${product.name}|"></p>
-            <p th:text="|値段: ${product.price}|"></p>
-            <button type="submit" class="button" th:name="|update${product.id}|">修正</button>
-            <button type="submit" class="button" th:name="|delete${product.id}|">削除</button>
+        <form th:action="edit" method="post" th:object="${editForm}">
+            <label for="id" class="inputLabel">ID</label>
+<!--            <input name="POST時のデータ名" id="labelタグの対応">-->
+            <input type="text" name="id" id="id" th:value="${product.id}" readonly><br>
+            <label for="name" class="inputLabel">商品名</label>
+            <input type="text" name="name" id="name" th:value="${product.name}" readonly><br>
+            <label for="price" class="inputLabel">値段</label>
+            <input type="text" name="price" id="price" th:value="${product.price}" readonly><br>
+
+            <button type="submit" class="button" name="update">修正</button>
+            <button type="submit" class="button" name="delete">削除</button>
         </form>
     </body>
 </html>

@@ -4,25 +4,44 @@
     <meta charset="UTF-8">
     <title>製品追加</title>
     <style>
+        .button {
+              display       : inline-block;
+              font-size     : 12pt;        /* 文字サイズ */
+              text-align    : center;      /* 文字位置   */
+              cursor        : pointer;     /* カーソル   */
+              padding       : 12px 12px;   /* 余白       */
+              background    : #ffffff;     /* 背景色     */
+              color         : #000000;     /* 文字色     */
+              line-height   : 1em;         /* 1行の高さ  */
+              transition    : .3s;         /* なめらか変化 */
+              border        : 2px solid #000000;
+            }
         .error {
             color: red;
         }
+        .inputLabel{
+                display     :inline-block;
+                width       :100px;
+            }
     </style>
 </head>
 <body>
 <h1>商品追加</h1>
 <form th:action="@{/product-add}" method="post" th:object="${addForm}">
-    <p>商品名</p>
+    <label for="name" class="inputLabel">商品名</label>
     <div class="error" th:each="error: ${#fields.errors('name')}">
         [[ ${error} ]]
     </div>
-    <p><input type="text" th:field="*{name}"></p>
-    <p>値段</p>
+    <input id="name" type="text" th:field="*{name}">
+    <br>
+
+    <label for="price" class="inputLabel">値段</label>
     <div class="error" th:each="error: ${#fields.errors('price')}">
         [[ ${error} ]]
     </div>
-    <p><input type="text" th:field="*{price}"></p>
-    <p><button type="submit">追加</button></p>
+    <input id="price" type="text" th:field="*{price}">
+    <br>
+    <button type="submit" class="button">追加</button>
 </form>
 
 </body>

@@ -4,30 +4,53 @@
     <meta charset="UTF-8">
     <title>製品情報更新</title>
     <style>
+        .button {
+              display       : inline-block;
+              font-size     : 12pt;        /* 文字サイズ */
+              text-align    : center;      /* 文字位置   */
+              cursor        : pointer;     /* カーソル   */
+              padding       : 12px 12px;   /* 余白       */
+              background    : #ffffff;     /* 背景色     */
+              color         : #000000;     /* 文字色     */
+              line-height   : 1em;         /* 1行の高さ  */
+              transition    : .3s;         /* なめらか変化 */
+              border        : 2px solid #000000;
+        }
         .error {
             color: red;
+        }
+        .inputLabel{
+                display     :inline-block;
+                width       :100px;
         }
     </style>
 </head>
 <body>
 <h1>商品情報更新</h1>
 <!--<form th:action="@{update}" method="post" th:object="${updateForm}">-->
-<form method="post" th:object="${updateForm}">
-    <p th:text="|ID: ${product.id}|"></p>
+<form method="post" th:object="${editForm}">
+    <label class="inputLabel" for="id">ID</label>
+    <div class="error" th:each="error: ${#fields.errors('id')}">
+        [[ ${error} ]]
+    </div>
+    <input id="id" type="text" name="id" th:value="${product.id}" readonly>
+    <br>
 
-    <p>商品名:
+    <label class="inputLabel" for="name">商品名</label>
     <div class="error" th:each="error: ${#fields.errors('name')}">
         [[ ${error} ]]
     </div>
-    <input type="text" name="name" th:value="${product.name}"></p>
+    <input id="name" type="text" name="name" th:value="${product.name}">
+    <br>
 
-    <p>値段:
+    <label class="inputLabel" for="price">値段</label>
     <div class="error" th:each="error: ${#fields.errors('price')}">
         [[ ${error} ]]
     </div>
-    <input type="text" name="price" th:value="${product.price}"></p>
+    <input id="price" type="text" name="price" th:value="${product.price}">
+    <br>
 
-    <p><button type="submit">更新</button></p>
+    <p><button class="button" type="submit">更新</button></p>
 </form>
 
 </body>

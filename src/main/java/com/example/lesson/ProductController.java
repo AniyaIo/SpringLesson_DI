@@ -1,6 +1,7 @@
 package com.example.lesson;
 
 import com.example.lesson.form.AddForm;
+import com.example.lesson.form.InputForm;
 import com.example.lesson.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +47,7 @@ public class ProductController {
     @GetMapping("product/update/{id}")
     public String indexProductUpdate(@PathVariable("id") int id,
                                      Model model,
-                                     @ModelAttribute("updateForm") AddForm updateForm) {
+                                     @ModelAttribute("editForm") InputForm editForm) {
         model.addAttribute("product",productService.findById(id));
         return "update";
     }
@@ -54,7 +55,7 @@ public class ProductController {
     @PostMapping("product/update/{id}")
     public String productUpdate(@PathVariable("id") int id,
                                 Model model,
-                                @Validated @ModelAttribute("updateForm") AddForm updateForm,
+                                @Validated @ModelAttribute("editForm") InputForm editForm,
                                 BindingResult errorResult) {
         if(errorResult.hasErrors()) {
             model.addAttribute("product",productService.findById(id));
@@ -63,20 +64,21 @@ public class ProductController {
         productService.update(
                 new ProductRecord(
                         id,
-                        updateForm.getName(),
-                        Integer.parseInt(updateForm.getPrice())));
+                        editForm.getName(),
+                        Integer.parseInt(editForm.getPrice())));
         return "redirect:/product-list";
     }
 
-    @RequestMapping(value = "edit" , params = "update", method = RequestMethod.POST)
-    public String productUpdate(@ModelAttribute("editForm") int id) {
+    @RequestMapping(value = "product/edit" , params = "update", method = RequestMethod.POST)
+    public String productUpdate(@ModelAttribute("editForm") InputForm inputForm) {
         //productService.update(id);
-        return "redirect:/product/update/"+id;
+        System.out.println("redirect:/product/update/"+inputForm.getId());
+        return "redirect:/product/update/"+inputForm.getId();
     }
 
-    @RequestMapping(value = "edit" , params = "delete", method = RequestMethod.POST)
-    public String productDelete(@ModelAttribute("editForm") int id) {
-        productService.delete(id);
+    @RequestMapping(value = "product/edit" , params = "delete", method = RequestMethod.POST)
+    public String productDelete(@ModelAttribute("editForm") InputForm inputForm) {
+        productService.delete(Integer.parseInt(inputForm.getId()));
         return "redirect:/product-list";
     }
 }
